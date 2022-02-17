@@ -5,3 +5,39 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+
+/* header */
+#page-title {
+    color: #1E90FF;
+    font-size: 48px;
+}
+#page-title img {
+    margin-top: -10px;
+}
+
+main .img-box img {
+    width: 100%;
+    max-height: 715px;
+}
+/* calculator body */
+.calculator-body {
+    background-color: #F5FFFA;
+}
+.calculator-body input {
+    background-color: rgba(173, 216, 230, 0.4);
+    font-size: 14px;
+}
+.calculator-body h3 {
+    font-size: 22px;
+    font-weight: 600;
+}
+.calculator-body h5 {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+.calculator-body button {
+    background-color: #1E90FF;
+}
+.calculator-body #saving-input {
+    width: 130px;
+}
