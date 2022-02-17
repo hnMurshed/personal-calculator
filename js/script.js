@@ -64,7 +64,9 @@ function getBalanceAmount () {
     // get balance field
     const balanceField = document.getElementById('balance-field');
     balanceField.innerText = monthlyIncome - totalExpensesAmount;
+    // const balanceAmount = parseFloat(balanceField.innerText);
 
+    // return balanceAmount;
 }
 
 // event handling on Calculate button
@@ -80,9 +82,34 @@ function getSavingAmount () {
     // get saving amount field
     const savingAmountField = document.getElementById('saving-amount');
     savingAmountField.innerText = (monthlyIncome * savingInputParchent) / 100;
+    // savingAmount = parseFloat(savingAmountField.innerText);
+    // return savingAmount;
+}
+
+// get current savingAmount and balanceAmount
+function getCurrentSavingBalance (fieldId) {
+    const savingAmountField = document.getElementById(fieldId);
+    const currentAmount = parseFloat(savingAmountField.innerText);
+
+    return currentAmount;
+}
+
+// get remaining balance
+function getRemainingBalance () {
+    const savingAmount = getCurrentSavingBalance ('saving-amount');
+    const balanceAmount = getCurrentSavingBalance ('balance-field');
+
+    // get remaining balance field
+    const remainingBalanceField = document.getElementById('remaining-balance');
+    remainingBalanceField.innerText = balanceAmount - savingAmount;
 }
 
 // envent handling on Save button
 document.getElementById('save-button').addEventListener('click', function () {
     getSavingAmount ()
+    getRemainingBalance ()
+
+    // clear icome input field
+    const inputField = document.getElementById('income-amount');
+    inputField.value = '';
 })
