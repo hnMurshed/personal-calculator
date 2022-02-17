@@ -1,3 +1,25 @@
+// get inocome amount with getInputAmount function
+
+function getIncomeInputAmount () {
+    const inputField = document.getElementById('income-amount');
+    const inputValue = inputField.value;
+    const inputAmount = parseFloat(inputValue);
+
+    // if (typeof inputField.value != 'number') {
+    //     console.log('Please input a number');
+    // }
+    // else {  
+    //     const inputValue = inputField.value;
+    //     const inputAmount = parseFloat(inputValue);
+        
+    // }
+
+    // clear input fields
+    // inputField.value = '';
+
+    return inputAmount;
+}
+
 // get inocome and expenses amount with getInputAmount function
 
 function getInputAmount (inputId) {
@@ -14,10 +36,9 @@ function getInputAmount (inputId) {
         
     // }
 
-    return inputAmount;
-
     // clear input fields
     inputField.value = '';
+    return inputAmount;
 }
 
 // get total expenses and balance amount
@@ -37,7 +58,7 @@ function getTotalExpense () {
 
 // get balance amount
 function getBalanceAmount () {
-    const monthlyIncome = getInputAmount ('income-amount');
+    const monthlyIncome = getIncomeInputAmount ();
     const totalExpensesAmount = getTotalExpense ();
 
     // get balance field
@@ -49,4 +70,19 @@ function getBalanceAmount () {
 // event handling on Calculate button
 document.getElementById('calculate-button').addEventListener('click', function () {
     getBalanceAmount ()
+})
+
+// get saving amount with function
+function getSavingAmount () {
+    const savingInputParchent = getInputAmount ('saving-input');
+    const monthlyIncome = getIncomeInputAmount ();
+
+    // get saving amount field
+    const savingAmountField = document.getElementById('saving-amount');
+    savingAmountField.innerText = (monthlyIncome * savingInputParchent) / 100;
+}
+
+// envent handling on Save button
+document.getElementById('save-button').addEventListener('click', function () {
+    getSavingAmount ()
 })
