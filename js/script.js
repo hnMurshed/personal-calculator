@@ -3,9 +3,9 @@ function getIncomeInputAmount () {
     const inputField = document.getElementById('income-amount');
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
-    if (inputAmount != 'number') {
-        document.getElementById('income-error').innerText = 'Please input a number';
-    }
+    // if (inputAmount != 'number') {
+    //     document.getElementById('income-error').innerText = 'Please input a number';
+    // }
     if (inputAmount < 0) {
         document.getElementById('income-error').innerText = 'Not allowed negetive number';
     }
@@ -22,13 +22,10 @@ function getInputAmount (inputId) {
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
 
-    if (inputAmount != 'number') {
-        
-    }
-    else {
-        inputField.value = '';
-        return inputAmount;
-    }
+    // clear field
+    inputField.value = '';
+
+    return inputAmount;
 }
 
 
@@ -42,7 +39,7 @@ function getTotalExpense () {
 
     // get total expenses field and amount
     const totalExpensesField = document.getElementById('total-expenses');
-    if (foodCost == undefined || clothingCost == undefined || rentCost == undefined) {
+    if (foodCost == NaN || clothingCost == NaN || rentCost == NaN) {
         document.getElementById('expense-error').innerText = 'Include number for each input';
     }
     else if (foodCost < 0 || clothingCost < 0 || rentCost < 0) {
@@ -89,7 +86,7 @@ function getSavingAmount () {
     // get saving amount field
     const savingAmountField = document.getElementById('saving-amount');
 
-    if (savingInputParchent == undefined || monthlyIncome == undefined) {
+    if (savingInputParchent == NaN || monthlyIncome == undefined) {
         console.log(alert('Please, percentage number can not be negetive or a text'))
     }
     else {
