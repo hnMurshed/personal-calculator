@@ -65,8 +65,11 @@ function getBalanceAmount () {
     // get balance field
     const balanceField = document.getElementById('balance-field');
 
-    if (monthlyIncome == undefined || totalExpensesAmount || undefined) {
+    if (monthlyIncome == undefined || totalExpensesAmount == undefined) {
         console.log('sorry, can not perform the calculation. Maybe you include a wrong input')
+    }
+    else if (totalExpensesAmount > monthlyIncome) {
+        console.log(alert('You can not spend over your income'));
     }
     else {
         balanceField.innerText = monthlyIncome - totalExpensesAmount;
@@ -87,7 +90,7 @@ function getSavingAmount () {
     const savingAmountField = document.getElementById('saving-amount');
 
     if (savingInputParchent == undefined || monthlyIncome == undefined) {
-        console.log(alert('sorry, can not perform the calculation. Maybe you include a wrong input'))
+        console.log(alert('Please, percentage number can not be negetive or a text'))
     }
     else {
         savingAmountField.innerText = (monthlyIncome * savingInputParchent) / 100;
@@ -109,6 +112,10 @@ function getRemainingBalance () {
 
     // get remaining balance field
     const remainingBalanceField = document.getElementById('remaining-balance');
+
+    if (savingAmount > balanceAmount) {
+        console.log(alert('You can not save money. your saving amount is bigger than your balance'))
+    }
     remainingBalanceField.innerText = balanceAmount - savingAmount;
 }
 
