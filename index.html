@@ -32,34 +32,42 @@
                         <div class="calculator-body text-center">
                             <div class="p-5">
                                 <!-- === Income === -->
-                                <h3 class="mb-4">Income</h3>
-                                <div class="d-flex align-items-center justify-content-end">
+                                <h3 class="mb-5">Income</h3>
+                                <div class="d-flex align-items-center justify-content-end error-message-box">
+                                    <!-- error message -->
+                                    <p id="income-error-message" class="error-message text-white text-center mb-2 px-2 py-1 rounded-3">Food amount not correct!</p>
                                     <h5 class="me-2">Income:</h5>
-                                    <input id="income-amount" class="border-0 rounded-1 px-2 py-1" type="text" placeholder="Your monthly income" name="">
+                                    <input id="income-amount" class="border-none rounded-1 px-2 py-1" type="text" placeholder="Your monthly income" name="">
                                 </div>
                                 <p id="income-error" class="text-danger text-center mb-2"></p>
 
                                 <!-- === Expenses === -->
-                                <h3 class="my-4">Expenses</h3>
+                                <h3 class="my-5">Expenses</h3>
 
-                                <!-- Food -->
-                                <div class="d-flex align-items-center justify-content-end my-3">
-                                    <h5 class="me-2">Food:</h5>
-                                    <input id="food-cost" class="border-0 rounded-1 px-2 py-1" type="text" placeholder="Monthly food cost" name="">
-                                </div>
-                               
-                                <!-- Rent -->
-                                <div class="d-flex align-items-center justify-content-end my-3">
-                                    <h5 class="me-2">Rent:</h5>
-                                    <input id="rent-cost" class="border-0 rounded-1 px-2 py-1" type="text" placeholder="Monthly rent" name="">
-                                </div>
+                                <div id="expenses-field" class="mb-5">
+                                    <!-- Food -->
+                                    <div class="d-flex align-items-center justify-content-end my-3 error-message-box">
+                                        <!-- error message -->
+                                        <p id="food-error-message" class="error-message text-white text-center mb-2 px-2 py-1 rounded-3">Food amount not correct!</p>
+                                        <p id="rent-error-message" class="error-message text-white text-center mb-2 px-2 py-1 rounded-3">Rent amount not correct!</p>
+                                        <p id="cloth-error-message" class="error-message text-white text-center mb-2 px-2 py-1 rounded-3">Cloth amount not correct!</p>
+                                        
+                                        <h5 class="me-2">Food:</h5>
+                                        <input id="food-cost" class="border-none rounded-1 px-2 py-1" type="text" placeholder="Monthly food cost" name="">
+                                    </div>
+                                
+                                    <!-- Rent -->
+                                    <div class="d-flex align-items-center justify-content-end my-3">
+                                        <h5 class="me-2">Rent:</h5>
+                                        <input id="rent-cost" class="border-none rounded-1 px-2 py-1" type="text" placeholder="Monthly rent" name="">
+                                    </div>
 
-                                <!-- Clothes -->
-                                <div class="d-flex align-items-center justify-content-end mt-2">
-                                    <h5 class="me-2">Clothes:</h5>
-                                    <input id="clothing-cost" class="border-0 rounded-1 px-2 py-1" type="text" placeholder="Monthly clothing cost" name="">
+                                    <!-- Clothes -->
+                                    <div class="d-flex align-items-center justify-content-end mt-2">
+                                        <h5 class="me-2">Clothes:</h5>
+                                        <input id="clothing-cost" class="border-none rounded-1 px-2 py-1" type="text" placeholder="Monthly clothing cost" name="">
+                                    </div>
                                 </div>
-                                <p id="expense-error" class="text-danger text-center mb-2"></p>
 
                                 <!-- === calculate button === -->
                                 <button id="calculate-button" class="text-white border-0 rounded px-5 py-2 mt-3">Calculate</button>
@@ -76,8 +84,13 @@
                                 <div class="d-flex align-items-center justify-content-center justify-content-md-end">
                                     <h5 class="mx-2">Save:</h5>
 
-                                    <!-- saving input -->
-                                    <input id="saving-input" class="border-0 rounded-1 px-2 py-1 mx-2 text-center" type="text" placeholder="% Savings" name="">
+                                    <div class="error-message-box">
+                                        <!-- error message -->
+                                        <p id="saving-error-message" class="error-message text-white text-center mb-2 px-2 py-1 rounded-3">Input not correct!</p>
+                                        <!-- saving input -->
+                                        <input id="saving-input" class="border-none rounded-1 px-2 py-1 mx-2 text-center" type="text" placeholder="% Savings" name="">
+                                    </div>
+                                    
                                     <h5 class="mx-2">%</h5>
 
                                     <!-- save button -->

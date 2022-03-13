@@ -3,17 +3,30 @@ function getIncomeInputAmount () {
     const inputField = document.getElementById('income-amount');
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
-    // if (inputAmount != 'number') {
-    //     document.getElementById('income-error').innerText = 'Please input a number';
-    // }
-    if (inputAmount < 0) {
-        document.getElementById('income-error').innerText = 'Not allowed negetive number';
+    if (!inputAmount) {
+        displayError('income-amount', 'income-error-message');
+    }
+    else if (inputAmount < 0) {
+        alert('Please input positive number')
     }
     else {
-        document.getAnimations('income-error').innerText = '';
-        return inputAmount; 
+        hideError('income-amount', 'income-error-message');
     }
-    
+
+    return inputAmount;
+}
+
+const displayError = (id, errorId) => {
+    const errorField = document.getElementById(id);
+    errorField.style.backgroundColor = '#ffe6e6';
+    errorField.style.border = '1px solid #ff6666';
+    document.getElementById(errorId).style.display = 'block';
+}
+const hideError = (id, errorId) => {
+    const errorField = document.getElementById(id);
+    errorField.style.backgroundColor = '#add8e666';
+    errorField.style.border = 'none';
+    document.getElementById(errorId).style.display = 'none';
 }
 
 // get inocome and expenses amount with getInputAmount function
@@ -21,6 +34,10 @@ function getInputAmount (inputId) {
     const inputField = document.getElementById(inputId);
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
+
+    if (inputAmount < 0) {
+        alert('Please input positive number')
+    }
 
     // clear field
     inputField.value = '';
@@ -35,20 +52,35 @@ function getTotalExpense () {
     const foodCost = getInputAmount ('food-cost');
     const rentCost = getInputAmount ('rent-cost');
     const clothingCost = getInputAmount ('clothing-cost');
-    console.log(rentCost, clothingCost);
+
+    if (!foodCost) {
+        displayError('food-cost', 'food-error-message');
+    }
+    else {
+        hideError('food-cost', 'food-error-message');
+    }
+    if (!rentCost) {
+        displayError('rent-cost', 'rent-error-message');
+    }
+    else {
+        hideError('rent-cost', 'rent-error-message');
+    }
+    if (!clothingCost) {
+        displayError('clothing-cost', 'cloth-error-message');
+    }
+    else {
+        hideError('clothing-cost', 'cloth-error-message');
+    }
 
     // get total expenses field and amount
     const totalExpensesField = document.getElementById('total-expenses');
-    if (foodCost == NaN || clothingCost == NaN || rentCost == NaN) {
-        document.getElementById('expense-error').innerText = 'Include number for each input';
-    }
-    else if (foodCost < 0 || clothingCost < 0 || rentCost < 0) {
+
+    if (foodCost < 0 || clothingCost < 0 || rentCost < 0) {
         document.getElementById('expense-error').innerText = 'Not allowed negetive number';
     }
-    else {
+    else if (foodCost && clothingCost && rentCost) {
         totalExpensesField.innerText = foodCost + rentCost + clothingCost;
         const currentTotalExpenses = parseFloat(totalExpensesField.innerText);
-        document.getElementById('expense-error').innerText = '';
         return currentTotalExpenses;
     }
     
@@ -62,13 +94,10 @@ function getBalanceAmount () {
     // get balance field
     const balanceField = document.getElementById('balance-field');
 
-    if (monthlyIncome == undefined || totalExpensesAmount == undefined) {
-        console.log('sorry, can not perform the calculation. Maybe you include a wrong input')
-    }
-    else if (totalExpensesAmount > monthlyIncome) {
+    if (totalExpensesAmount > monthlyIncome) {
         console.log(alert('You can not spend over your income'));
     }
-    else {
+    else if (monthlyIncome && totalExpensesAmount) {
         balanceField.innerText = monthlyIncome - totalExpensesAmount;
     }
 }
@@ -83,13 +112,17 @@ function getSavingAmount () {
     const savingInputParchent = getInputAmount ('saving-input');
     const monthlyIncome = getIncomeInputAmount ();
 
+    if (!savingInputParchent) {
+        displayError('saving-input', 'saving-error-message');
+    }
+    else {
+        hideError('saving-input', 'saving-error-message');
+    }
+
     // get saving amount field
     const savingAmountField = document.getElementById('saving-amount');
 
-    if (savingInputParchent == NaN || monthlyIncome == undefined) {
-        console.log(alert('Please, percentage number can not be negetive or a text'))
-    }
-    else {
+    if (savingInputParchent && monthlyIncome) {
         savingAmountField.innerText = (monthlyIncome * savingInputParchent) / 100;
     }
 }
@@ -111,9 +144,11 @@ function getRemainingBalance () {
     const remainingBalanceField = document.getElementById('remaining-balance');
 
     if (savingAmount > balanceAmount) {
-        console.log(alert('You can not save money. your saving amount is bigger than your balance'))
+        console.log(alert('Insufficient amount to save'))
     }
-    remainingBalanceField.innerText = balanceAmount - savingAmount;
+    else if (savingAmount && balanceAmount) {
+        remainingBalanceField.innerText = balanceAmount - savingAmount;
+    }
 }
 
 // envent handling on Save button

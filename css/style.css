@@ -27,6 +27,22 @@ main .img-box img {
     background-color: rgba(173, 216, 230, 0.4);
     font-size: 14px;
 }
+.error-message-box {
+    position: relative;
+}
+.error-message {
+    display: none;
+    background-color: #b3000077;
+    font-size: 13px;
+    position: absolute;
+    top: -40px;
+    right: 5px;
+}
+#saving-error-message {
+    top: -40px;
+    right: 10px;
+}
+
 .calculator-body h3 {
     font-size: 22px;
     font-weight: 600;
@@ -40,4 +56,7 @@ main .img-box img {
 }
 .calculator-body #saving-input {
     width: 130px;
+}
+.border-none {
+    border: none;
 }
