@@ -1,5 +1,5 @@
 // get inocome amount with getInputAmount function
-function getIncomeInputAmount () {
+function getIncomeInputAmount() {
     const inputField = document.getElementById('income-amount');
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
@@ -29,8 +29,8 @@ const hideError = (id, errorId) => {
     document.getElementById(errorId).style.display = 'none';
 }
 
-// get inocome and expenses amount with getInputAmount function
-function getInputAmount (inputId) {
+// get expenses amount
+function getInputAmount(inputId) {
     const inputField = document.getElementById(inputId);
     const inputValue = inputField.value;
     const inputAmount = parseFloat(inputValue);
@@ -45,13 +45,64 @@ function getInputAmount (inputId) {
     return inputAmount;
 }
 
+// get new expense amount
+function getNewExpenseAmount(inputId) {
+    const inputField = document.getElementById(inputId + '-cost');
+    const inputValue = inputField.value;
+    const inputAmount = parseFloat(inputValue);
 
+    if (inputAmount < 0) {
+        alert('Please input positive number')
+    }
+
+    // clear field
+    // inputField.value = '';
+    sumNewExpenses(inputAmount);
+}
+
+// sum new expenses
+let currentNewExpense = 0;
+const sumNewExpenses = (newExpense) => {
+    if (newExpense && newExpense > 0) {
+        currentNewExpense += newExpense;
+        console.log(currentNewExpense);
+    }
+}
+
+// add more expense
+const addNewExpense = () => {
+    const expensesField = document.getElementById('expenses-field');
+    const newExpenseName = document.getElementById('expense-name-input').value;
+    const newExpenseAmount = document.getElementById('expense-amount').value;
+    const div = document.createElement('div');
+    div.className = "d-flex align-items-center justify-content-end my-3";
+
+    div.innerHTML = `
+        <h5 class="me-2 text-capitalize">${newExpenseName}:</h5>
+        <input id="${newExpenseName}-cost" class="border-none rounded-1 px-2 py-1" type="text" placeholder="${newExpenseName} cost amount" name="">
+    `;
+
+    if (!newExpenseName || !newExpenseAmount) {
+        alert('Fields are required to filled with currect value');
+        console.log(newExpenseAmount, newExpenseName);
+    }
+    else {
+        expensesField.appendChild(div);
+        document.getElementById(newExpenseName + '-cost').value = newExpenseAmount;
+
+        getNewExpenseAmount(newExpenseName);
+
+        // clear field
+        document.getElementById('expense-name-input').value = '';
+        document.getElementById('expense-amount').value = '';
+    }
+}
 
 // get total expenses amount
-function getTotalExpense () {
-    const foodCost = getInputAmount ('food-cost');
-    const rentCost = getInputAmount ('rent-cost');
-    const clothingCost = getInputAmount ('clothing-cost');
+function getTotalExpense() {
+    const foodCost = getInputAmount('food-cost');
+    const rentCost = getInputAmount('rent-cost');
+    const clothingCost = getInputAmount('clothing-cost');
 
     if (!foodCost) {
         displayError('food-cost', 'food-error-message');
@@ -79,18 +130,18 @@ function getTotalExpense () {
         document.getElementById('expense-error').innerText = 'Not allowed negetive number';
     }
     else if (foodCost && clothingCost && rentCost) {
-        totalExpensesField.innerText = foodCost + rentCost + clothingCost;
+        totalExpensesField.innerText = foodCost + rentCost + clothingCost + currentNewExpense;
         const currentTotalExpenses = parseFloat(totalExpensesField.innerText);
         return currentTotalExpenses;
     }
-    
+
 }
 
 // get balance amount
-function getBalanceAmount () {
-    const monthlyIncome = getIncomeInputAmount ();
-    const totalExpensesAmount = getTotalExpense ();
-    
+function getBalanceAmount() {
+    const monthlyIncome = getIncomeInputAmount();
+    const totalExpensesAmount = getTotalExpense();
+
     // get balance field
     const balanceField = document.getElementById('balance-field');
 
@@ -104,13 +155,16 @@ function getBalanceAmount () {
 
 // event handling on Calculate button
 document.getElementById('calculate-button').addEventListener('click', function () {
-    getBalanceAmount ()
+    getBalanceAmount();
+
+    // clear new expense input fields
+    // document.getElementById(newExpenseName + '-cost').value = '';
 })
 
 // get saving amount with function
-function getSavingAmount () {
-    const savingInputParchent = getInputAmount ('saving-input');
-    const monthlyIncome = getIncomeInputAmount ();
+function getSavingAmount() {
+    const savingInputParchent = getInputAmount('saving-input');
+    const monthlyIncome = getIncomeInputAmount();
 
     if (!savingInputParchent) {
         displayError('saving-input', 'saving-error-message');
@@ -128,7 +182,7 @@ function getSavingAmount () {
 }
 
 // get current savingAmount and balanceAmount
-function getCurrentSavingBalance (fieldId) {
+function getCurrentSavingBalance(fieldId) {
     const savingAmountField = document.getElementById(fieldId);
     const currentAmount = parseFloat(savingAmountField.innerText);
 
@@ -136,9 +190,9 @@ function getCurrentSavingBalance (fieldId) {
 }
 
 // get remaining balance
-function getRemainingBalance () {
-    const savingAmount = getCurrentSavingBalance ('saving-amount');
-    const balanceAmount = getCurrentSavingBalance ('balance-field');
+function getRemainingBalance() {
+    const savingAmount = getCurrentSavingBalance('saving-amount');
+    const balanceAmount = getCurrentSavingBalance('balance-field');
 
     // get remaining balance field
     const remainingBalanceField = document.getElementById('remaining-balance');
@@ -153,8 +207,8 @@ function getRemainingBalance () {
 
 // envent handling on Save button
 document.getElementById('save-button').addEventListener('click', function () {
-    getSavingAmount ()
-    getRemainingBalance ()
+    getSavingAmount()
+    getRemainingBalance()
 
     // clear icome input field
     const inputField = document.getElementById('income-amount');
