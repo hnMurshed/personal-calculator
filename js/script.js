@@ -84,7 +84,6 @@ const addNewExpense = () => {
 
     if (!newExpenseName || !newExpenseAmount) {
         alert('Fields are required to filled with currect value');
-        console.log(newExpenseAmount, newExpenseName);
     }
     else {
         expensesField.appendChild(div);
@@ -95,7 +94,23 @@ const addNewExpense = () => {
         // clear field
         document.getElementById('expense-name-input').value = '';
         document.getElementById('expense-amount').value = '';
+
+        controlDisplayStyle('new-expense-adder', 'none');
+        controlDisplayStyle('add-more', 'block');
     }
+}
+// new-expense-adder field display none as default
+document.getElementById('new-expense-adder').style.display = 'none';
+
+// controlling display style
+const controlDisplayStyle = (id, style) => {
+    document.getElementById(id).style.display = style;
+}
+
+// control adding new expense feature
+const addMoreExpense = () => {
+    controlDisplayStyle('add-more', 'none');
+    controlDisplayStyle('new-expense-adder', 'block');
 }
 
 // get total expenses amount
